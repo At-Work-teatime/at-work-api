@@ -41,7 +41,7 @@ public class PostsApiControllerTest {
 
     @Test
     public void savePosts() throws Exception {
-        // gien
+        // given
         String title = "title";
         String content = "content";
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
