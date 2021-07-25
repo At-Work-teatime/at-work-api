@@ -1,4 +1,4 @@
-package com.atwork.user.web.dto;
+package com.atwork.web.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

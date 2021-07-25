@@ -1,4 +1,4 @@
-package com.atwork.user.web.dto;
+package com.atwork.web.dto;
 
 import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;

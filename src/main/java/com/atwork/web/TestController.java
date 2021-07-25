@@ -1,6 +1,6 @@
-package com.atwork.user.web;
+package com.atwork.web;
 
-import com.atwork.user.web.dto.HelloResponseDto;
+import com.atwork.web.dto.HelloResponseDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
