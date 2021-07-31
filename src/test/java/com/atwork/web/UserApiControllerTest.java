@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -62,6 +63,7 @@ public class UserApiControllerTest {
         assertThat(all.get(0).getEmail()).isEqualTo(email);
         assertThat(all.get(0).getName()).isEqualTo(name);
         assertThat(all.get(0).getDescription()).isEqualTo(description);
+        assertThat(all.get(0).getStatus()).isEqualTo(User.UserState.ACTIVE);
     }
 
     @Test
@@ -86,5 +88,24 @@ public class UserApiControllerTest {
         List<User> all = userRepository.findAll();
         assertThat(all.get(0).getName()).isEqualTo(expectedName);
         assertThat(all.get(0).getDescription()).isEqualTo(expectedDescription);
+    }
+
+    @Test
+    public void deleteUser() throws Exception {
+        User savedUser = userRepository.save(User.builder().email("test@naver.com").name("tester").description("test user").build());
+
+        Long deleteId = savedUser.getId();
+
+        String url = "http://localhost:" + port + "/api/v1/users/" + deleteId;
+
+        HttpEntity<Long> requestEntity = new HttpEntity<>(deleteId);
+
+        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, Long.class);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+
+        Optional<User> user = userRepository.findById(deleteId);
+        assertThat(user).isEmpty();
     }
 }
