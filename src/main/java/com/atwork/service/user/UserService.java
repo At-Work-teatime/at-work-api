@@ -36,6 +36,14 @@ public class UserService {
     }
 
     @Transactional
+    public Long inactive(Long id) {   // 실제론 soft delete 되어야함
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+        user.inactive();
+        return id;
+    }
+
+    @Transactional
     public Long delete(Long id) {   // 실제론 soft delete 되어야함
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
