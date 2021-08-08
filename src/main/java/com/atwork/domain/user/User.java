@@ -1,5 +1,7 @@
 package com.atwork.domain.user;
 
+import com.atwork.domain.department.Department;
+import com.atwork.domain.job.Job;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,11 +24,19 @@ public class User {
     @Column(length = 50, nullable = false)
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "jobId")
+    private Job job;
+
     @Column(length = 500, nullable = false)
     private String description;
 
     @Column(nullable = false)
     private int point;
+
+    @ManyToOne
+    @JoinColumn(name = "departmentId")
+    private Department department;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
